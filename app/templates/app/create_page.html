@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto_Lux</title>
+</head>
+<body>
+        <form method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <input type="text" name="name" placeholder="Enter car name:"><br><br>
+            <input type="text" name="model" placeholder="Enter car model:"><br><br>
+                <select name="category_id">
+                    <option value="" disabled selected>Choose category</option>
+                    {%for category in categories%}
+                        <option value="{{category.id}}",>{{category.name}}</option>
+                    {%endfor%}
+                </select><br><br>
+            <input type="text" name="condition" placeholder="Enter car condition:"><br><br>
+            <input type="Date" name="year" placeholder="Enter car year:"><br><br>
+            <input type="number" name="price" placeholder="Enter car price:"><br><br>
+            <input type="file" name="image" required>
+            <button type="submit">Submit</button>
+        </form>
+</body>
+</html>

@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import main_page,detail_page
+from .views import main_page,detail_page,add_model
 
 urlpatterns = [
     path('', main_page, name='main_page'),
-    path('detail_page/<int:car_id>', detail_page, name='detail_page')
+    path('detail_page/<int:car_id>', detail_page, name='detail_page'),
+    path('create_page/', add_model, name='add_model')
 ]

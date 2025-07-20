@@ -1,5 +1,7 @@
-from django.shortcuts import render
-from .models import Car
+from django.shortcuts import render,redirect
+from .models import Car, Category
+
+
 # Create your views here.
 def main_page(request):
     cars=Car.objects.all()
@@ -9,3 +11,21 @@ def main_page(request):
 def detail_page(request,car_id):
     car=Car.objects.filter(id=car_id).first()
     return render(request, 'app/detail_page.html', {'car': car})
+
+def add_model(request):
+    categories=Category.objects.all()
+    if request.method == "POST":
+        name=request.POST['name']
+        category_id=request.POST['category_id']
+        category=Category.objects.get(id=category_id)
+        year=request.POST['year']
+        price=request.POST['price']
+        model=request.POST['model']
+        condition=request.POST['condition']
+        print(request.FILES)
+        car=Car(name=name,category=category,year=year,price=price,model=model,condition=condition,image = request.FILES)
+        car.save()
+        print("success")
+        return redirect(request, 'app/create_page.html')
+
+    return render(request, 'app/create_page.html',{'categories': categories})
