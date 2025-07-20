@@ -36,6 +36,10 @@
   </style>
 </head>
 <body>
+<a href="{% url 'add_model'%}">
+  <button type="button"> Add your car></button>
+</a>
+
   <div class="container py-5">
     <div class="row row-cols-1 row-cols-md-2 g-4">
       {% for car in cars %}

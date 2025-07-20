@@ -22,10 +22,8 @@ def add_model(request):
         price=request.POST['price']
         model=request.POST['model']
         condition=request.POST['condition']
-        print(request.FILES)
-        car=Car(name=name,category=category,year=year,price=price,model=model,condition=condition,image = request.FILES)
+        car=Car(name=name,category=category,year=year,price=price,model=model,condition=condition,image = request.FILES['image'])
         car.save()
-        print("success")
-        return redirect(request, 'app/create_page.html')
+        return redirect('main_page')
 
     return render(request, 'app/create_page.html',{'categories': categories})
