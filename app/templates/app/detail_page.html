@@ -20,6 +20,27 @@
       <h5 class="card-title"><h1>{{car}}</h1></h5>
       <p class="card-text"><h1>Car info:</h1>
       <ul>
+          <a href="{% url 'update_car' car.id %}">
+              <button style="
+        background-color: Green;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;">Обновить:</button>
+          </a>
+                <a href="{% url 'delete_car' car.id %}" >
+                        <button type="submit" style="
+                            background-color: #e74c3c;
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            font-size: 16px;
+                            border-radius: 8px;
+                            cursor: pointer;
+                        ">Удалить</button>
+                </a>
         <li>Category: {{car.category}}</li>
         <li>Year: {{car.year}}</li>
         <li>Model: {{car.model}}</li>

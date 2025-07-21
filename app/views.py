@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Car, Category
+from .forms import CarCreateForm
 
 
 # Create your views here.
@@ -27,3 +28,38 @@ def add_model(request):
         return redirect('main_page')
 
     return render(request, 'app/create_page.html',{'categories': categories})
+
+def update_car(request,car_id):
+    car=Car.objects.get(id=car_id)
+    categories=Category.objects.all()
+    if request.method == "POST":
+        car.name=request.POST['name']
+        category_id=request.POST['category_id']
+        car.category=Category.objects.get(id=category_id)
+        car.year=request.POST['year']
+        car.price=request.POST['price']
+        car.model=request.POST['model']
+        car.condition=request.POST['condition']
+        car.image=request.FILES['image']
+        car.save()
+        return redirect('main_page')
+    return render(request, 'app/update_car.html',{'car': car, 'categories': categories})
+
+
+def create_car_2(request):
+    if request.method == 'POST':
+        form = CarCreateForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('main_page')
+    else:
+        form = CarCreateForm()
+
+    return render(request, 'app/create_page_2.html', {'form': form})
+        
+
+def delete_car(request,car_id):
+        car=Car.objects.get(id=car_id)
+        car.delete()
+        return redirect('main_page')
+

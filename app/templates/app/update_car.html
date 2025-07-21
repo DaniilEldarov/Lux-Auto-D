@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Lux</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background: #ffffff;
+            padding: 40px 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #fdfdfd;
+            font-size: 14px;
+        }
+
+        input[type="file"] {
+            padding: 6px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Добавить машину</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Название:</label>
+        <input type="text" name="name" placeholder="Введите название машины" value="{{ car.name }}">
+
+        <label>Модель:</label>
+        <input type="text" name="model" placeholder="Введите модель машины" value="{{ car.model }}">
+
+        <label>Год выпуска:</label>
+        <input type="number" name="year" value="{{ car.year }}">
+
+        <label>Категория:</label>
+        <select name="category_id" required>
+            <option value="" disabled selected>Выберите категорию</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Загрузите фото:</label>
+        <input type="file" name="image">
+
+        <label>Цена:</label>
+        <input type="number" name="price" value="{{car.price}}">
+
+        <label>Описание:</label>
+        <input type="text" name="condition" placeholder="Введите состояние машины" value="{{ car.condition }}">
+
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+
+</body>
+</html>

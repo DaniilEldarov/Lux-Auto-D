@@ -12,7 +12,7 @@ class Car(models.Model):
     model = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='cars')
     condition = models.CharField(max_length=100)
-    year = models.DateField()
+    year = models.SmallIntegerField()
     price = models.IntegerField()
     image = models.ImageField(upload_to='media/images')
     def __str__(self):
